@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  # nginx reverse proxy to enable the api and front end to be served from the
+  # same host:port.
+  # http://web-app.localhost:5000/api -> dockerhost:8080
+  # http://web-app.localhost:5000 -> dockerhost:3000
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "5000:80"
+    volumes:
+      - "./app.conf:/etc/nginx/conf.d/app.conf:ro"
